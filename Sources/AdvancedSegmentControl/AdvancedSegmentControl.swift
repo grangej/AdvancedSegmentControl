@@ -22,9 +22,9 @@ public struct AdvancedSegmentControl: View {
         return UnitPoint.center
     }
     
-    public init<Views>(selectedIndex: Binding<Int>, secondarySelection: Binding<Int?>?, @ViewBuilder content: TupleContent<Views>) {
-        
-        inputViews = ViewExtractor.getViews(from: content)
+    public init<Views>(selectedIndex: Binding<Int>, secondarySelection: Binding<Int?>?, @ViewBuilder tupleContent: TupleContent<Views>) {
+
+        inputViews = ViewExtractor.getViews(from: tupleContent)
         self._selectedIndex = selectedIndex
         self._secondarySelection = secondarySelection ?? .constant(nil)
     }
@@ -36,9 +36,9 @@ public struct AdvancedSegmentControl: View {
         self._secondarySelection = secondarySelection ?? .constant(nil)
     }
     
-    public init<Content: View & DynamicViewContentProvider>(selectedIndex: Binding<Int>, secondarySelection: Binding<Int?>?, content: ForEachContent<Content>) {
-        
-        inputViews = content().extractContent()
+    public init<Content: View & DynamicViewContentProvider>(selectedIndex: Binding<Int>, secondarySelection: Binding<Int?>?, forEachContent: ForEachContent<Content>) {
+
+        inputViews = forEachContent().extractContent()
         self._selectedIndex = selectedIndex
         self._secondarySelection = secondarySelection ?? .constant(nil)
 
